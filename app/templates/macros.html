@@ -1,7 +1,44 @@
-{% macro displayPitchList(pitch_list) %}
+{% macro displayPitchList(pitch-list) %}
 
-    {% for pitch in pitch_list %}
+    <!-- {% for pitch in pitch-list %}
         <li>{{ pitch.category}}</li>
-    {% endfor %}
+    {% endfor %} -->
+    <div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
+        <div class="card">
+            <div class="card-header" style="color: white
+            ;">
+                <b>{{pitch.category}}</b>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" style="color: rgba(0, 0, 0, 0.7);">{{pitch.title}}</h5>
+                <p class="card-text" style="color: rgb(73, 72, 72);">
+                    <i>{{pitch.pitch_content}}</i>
+                </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" style="font-size: 14px; color: dodgerblue;">~ {{pitch.author}}
+                    <a href="">
+                        <span class="fas fa-thumbs-up"></span>
+                    </a>&ensp;
+                    <a href="">
+                        <span class="fas fa-thumbs-down"></span>
+                    </a>&ensp;
+                    <a href="{{url_for('main.comments')}}">
+                        <span class="fas fa-comments"></span>
+                    </a>
+                </li>
+                <li class="list-group-item">{{pitch.published_at}}</li>
+                <li class="list-group-item" style="background-color: whitesmoke;">
+                    <a href="{{url_for('main.new_pitch')}}" class="new_pitch">
+                        <span id="new_pitch">Click to create a new Pitch
+                            <span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    {% endfor %} 
+    {% endmacro %} 
 
 {% endmacro %}
