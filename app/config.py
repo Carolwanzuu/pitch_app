@@ -13,7 +13,8 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    pass
+    SECRET_KEY = '<Flask WTF Secret Key>'
+
 
 
 class DevConfig(Config):
