@@ -2,11 +2,14 @@ from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
+    email = db.Column(db.String(255),unique = True, index = True)
     pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
+    password_hash = db.Column(db.String(255))
+
 
     def __repr__(self):
         return f'User {self.username}'
