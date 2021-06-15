@@ -75,4 +75,22 @@ def new_pitch():
         
         return redirect(url_for('main.index'))
     
-    return render_template('new_pitch.html', pitch_form = pitch_form)   
+    return render_template('new_pitch.html', pitch_form = pitch_form) 
+
+@main.route('/pitch/comments', methods = ['GET', 'POST'])
+@login_required
+def comments():    
+    comments_form = CommentsForm() 
+    comments = Comment.query.all()    
+
+    if comments_form.validate_on_submit():       
+
+        # Updated comment instance
+        new_comment = Comment(body = comments_form.body.data)
+
+        # Save review method
+        new_comment.save_comment()
+
+        return redirect(url_for('main.comments'))
+    
+    return render_template('comments.html', comments_form = comments_form, comments = comments)
