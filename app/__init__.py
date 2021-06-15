@@ -1,5 +1,5 @@
 from flask import Flask
-from .config import DevConfig
+from config import DevConfig
 from flask_bootstrap import Bootstrap
 
 # Initializing application
