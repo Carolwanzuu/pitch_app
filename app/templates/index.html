@@ -20,5 +20,44 @@
       <a class="nav-link" data-toggle="tab" href="#Promotions" role="tab">Promotions</a>
     </li>
   </ul>
+  <div class="tab-content">
+    <div style="margin-top: 1em;" class="tab-pane active" id="General" role="tabpanel">
+      <div class="container-fluid" style="margin: 0% 2%">
+        <div class="row">
+          {{macro.displayPitchList(general)}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="tab-pane" id="Products" role="tabpanel">
+      <div class="container-fluid" style="margin: 0% 2%">
+        <div class="row">
+          {{macro.displayPitchList(product_pitch)}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="tab-pane" id="Pickups" role="tabpanel">
+      <div class="container-fluid" style="margin: 0% 2%">
+        <div class="row">
+          {{macro.displayPitchList(pickup_lines)}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="tab-pane" id="Interviews" role="tabpanel">
+      <div class="container-fluid" style="margin: 0% 2%">
+        <div class="row">
+          {{macro.displayPitchList(interview_pitch)}}
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 1em;" class="tab-pane" id="Promotions" role="tabpanel">
+      <div class="container-fluid" style="margin: 0% 2%">
+        <div class="row">
+          {{macro.displayPitchList(promotion_pitch)}}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    
 
 {% endblock %}
