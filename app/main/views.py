@@ -1,8 +1,8 @@
-from flask import render_template
-from app import app
+from flask import render_template,request,redirect,url_for
+from . import main
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -10,7 +10,7 @@ def index():
     '''
 
     return render_template('index.html')
-@app.route('/user/<uname>')
+@main.route('/user/<uname>')
 def profile(uname):
     
 
