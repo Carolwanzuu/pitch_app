@@ -1,9 +1,10 @@
-from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import User
+from .. import db, photos
+from flask import render_template,request,redirect,url_for,abort
+from ..models import Comment, Pitch, User
 from .forms import  PitchForm,UpdateProfile,CommentsForm
 from flask_login import login_required, current_user
-from .. import db, photos
+
 
 # Views
 @main.route('/')
@@ -26,7 +27,7 @@ def index():
 @main.route('/user/<uname>')
 @login_required
 def profile(uname):
-    User = User.query.filter_by(username = uname).first()
+    user = User.query.filter_by(username = uname).first()
     if user is None:
         abort(404)
     return render_template('profile/profile.html',user = user)
@@ -94,3 +95,4 @@ def comments():
         return redirect(url_for('main.comments'))
     
     return render_template('comments.html', comments_form = comments_form, comments = comments)
+

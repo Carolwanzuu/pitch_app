@@ -1,21 +1,20 @@
 from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from .import login_manager
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
+
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True, index = True)
-    pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
+    pass_secure = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
     comments = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
@@ -35,7 +34,7 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
-    pass_secure = db.Column(db.String(255))
+   
 
 
 class Pitch(db.Model):
@@ -52,6 +51,10 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref = 'pitch', lazy = 'dynamic')
 
+    def save_pitch(self):
+      db.session.add(self)
+      db.session.commit()
+
 class Comment(db.Model):
     __tablename__ = 'comments'
 
@@ -59,9 +62,14 @@ class Comment(db.Model):
     body = db.Column(db.String)          
     published_at = db.Column(db.DateTime, default = datetime.utcnow)    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))  
+    
 
     
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
