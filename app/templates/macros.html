@@ -1,12 +1,11 @@
 {% macro displayPitchList(pitch-list) %}
 
-    <!-- {% for pitch in pitch-list %}
-        <li>{{ pitch.category}}</li>
-    {% endfor %} -->
+    {% for pitch in pitch-list %}
+
+    
     <div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
         <div class="card">
-            <div class="card-header" style="color: white
-            ;">
+            <div class="card-header" style="color: white;">
                 <b>{{pitch.category}}</b>
             </div>
             <div class="card-body">
@@ -39,6 +38,12 @@
     </div>
     
     {% endfor %} 
-    {% endmacro %} 
+   
 
+{% endmacro %}
+
+{% macro displayCommentsList(comment-list)%}
+{% for comment in comment-list %}
+    {{comment.body}}
+{%endfor%}
 {% endmacro %}
