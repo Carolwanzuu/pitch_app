@@ -1,6 +1,6 @@
-{% macro displayPitchList(pitch-list) %}
+{% macro displayPitchList(pitch_list) %}
 
-    {% for pitch in pitch-list %}
+    {% for pitch in pitch_list %}
 
     
     <div class="col-md-3 col-sm-6 col-xs-6" id='pitch'>
@@ -16,15 +16,12 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" style="font-size: 14px; color: dodgerblue;">~ {{pitch.author}}
-                    <a href="">
-                        <span class="fas fa-thumbs-up"></span>
-                    </a>&ensp;
-                    <a href="">
-                        <span class="fas fa-thumbs-down"></span>
-                    </a>&ensp;
-                    <a href="{{url_for('main.comments')}}">
-                        <span class="fas fa-comments"></span>
-                    </a>
+                    <a href="{{url_for('main.likes',pitch_id = pitch.id)}}" class= "btn btn-primary btn-sm"><i></i>Likes <span>{{pitch.likes.count()}}</span></a>
+                   
+                    <a href="{{url_for('main.dislikes',pitch_id = pitch.id)}}" class= "btn btn-danger btn-sm"></i>Dislikes <span>{{pitch.dislikes.count()}}</span></a>
+                    
+                    <span>Category: {{pitch.category}}</span>
+                    <a href="{{url_for('main.comments')}}"></a>
                 </li>
                 <li class="list-group-item">{{pitch.published_at}}</li>
                 <li class="list-group-item" style="background-color: whitesmoke;">
@@ -42,8 +39,8 @@
 
 {% endmacro %}
 
-{% macro displayCommentsList(comment-list)%}
-{% for comment in comment-list %}
-    {{comment.body}}
+{% macro displayCommentsList(comment_list)%}
+{% for comment in comment_list %}
+    <p>{{comment.body}}</p>
 {%endfor%}
 {% endmacro %}
