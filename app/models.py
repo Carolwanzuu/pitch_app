@@ -55,6 +55,10 @@ class Pitch(db.Model):
       db.session.add(self)
       db.session.commit()
 
+    @classmethod
+    def get_pitch_category(cls, group):
+     return cls.query.filter_by(category=group).all()
+
 class Comment(db.Model):
     __tablename__ = 'comments'
 

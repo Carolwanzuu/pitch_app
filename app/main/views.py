@@ -15,6 +15,9 @@ def index():
     View root page function that returns the index page and its data
     '''
     title = 'Pitches'
+
+    general = Pitch.get_pitch_category('General Pitches')
+
     general = Pitch.query.all()
     product_pitch = Pitch.query.filter_by(category = 'Product Pitch').all()
     pickup_lines = Pitch.query.filter_by(category = 'Pickup Lines').all()
