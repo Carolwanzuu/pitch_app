@@ -8,7 +8,6 @@ from flask_login import login_required, current_user
 
 # Views
 @main.route('/')
-@login_required
 def index():
 
     '''
@@ -16,7 +15,7 @@ def index():
     '''
     title = 'Pitches'
 
-    general = Pitch.get_pitch_category('General Pitches')
+    general = Pitch.query.all()
 
     general = Pitch.query.all()
     product_pitch = Pitch.query.filter_by(category = 'Product Pitch').all()

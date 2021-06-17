@@ -16,8 +16,10 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
     password_hash = db.Column(db.String(255))
-    pitches = db.relationship('Pitch', backref = 'user', lazy = 'dynamic')
-    comments = db.relationship('Comment', backref = 'user', lazy = 'dynamic')
+    likes = db.relationship('Likes', backref = 'users', lazy = 'dynamic')
+    dislikes = db.relationship('Dislikes', backref = 'users', lazy = 'dynamic')
+    pitches = db.relationship('Pitch', backref = 'users', lazy = 'dynamic')
+    comments = db.relationship('Comment', backref = 'users', lazy = 'dynamic')
 
 
     @property
@@ -34,8 +36,6 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
-   
-
 
 class Pitch(db.Model):
     __tablename__ = 'pitches'
@@ -45,8 +45,8 @@ class Pitch(db.Model):
     pitch_content = db.Column(db.String)
     category = db.Column(db.String(255))
     author = db.Column(db.String(255))
-    upvote = db.Column(db.Integer)
-    downvote = db.Column(db.Integer)        
+    likes = db.relationship('Likes', backref = 'pitches', lazy = 'dynamic')
+    dislikes = db.relationship('Dislikes', backref = 'pitches', lazy = 'dynamic')
     published_at = db.Column(db.DateTime, default = datetime.utcnow)    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment', backref = 'pitches', lazy = 'dynamic')
@@ -79,7 +79,7 @@ class Likes(db.Model):
 
   id = db.Column(db.Integer,primary_key=True)
   likes = db.Column(db.Integer,default=1)
-  pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+  pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
   user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
   def save_likes(self):
@@ -111,7 +111,7 @@ class Dislikes(db.Model):
 
   id = db.Column(db.Integer,primary_key=True)
   dislikes = db.Column(db.Integer,default=1)
-  pitch_id = db.Column(db.Integer,db.ForeignKey('pitch.id'))
+  pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
   user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
   def save_dislikes(self):
