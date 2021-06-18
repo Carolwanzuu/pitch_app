@@ -1,25 +1,26 @@
-# [News Highlights Application]
+# [One Minute Pitch]
 
 ## By Carolyne Wanzuu
 
 ## Description
 
-News Highlights is a web appliction that displays a list of news sources from around the world. A user is able to click on a news source and view an abreviated version of the particular news article. Clicking on the news article will then redirect you to the news article's web page.
+One minute Pitch is a web appliction that allows users to use that one minute wisely. The users will submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+
+The pitches are organized by category. You can have different categories like pickup lines, interview pitch, product pitch, promotion pitch.
 
 With the application, a user will be able to:
 
-* See various news sources and select the ones they prefer.
-* See all news sources from the source they selected.
-* See Image description and time the news article was created.
-* Click on an article and read it fully from the news source
+* See various pitch categories and select the ones they prefer.
+* Sign in and create new pitches
+* Like or dislike a pitch
 
 ## Specifications
 | Behaviour | Input | Output |
 | :---------------- | :---------------: | ------------------: |
-| Display news sources | **On page load** | List of various news sources is displayed per category |
-| Display articles from a news source | **Click a news source** | Redirected to a page with a list of articles from the source |
-| Display the preview of an article | **On page load** | Each article displays an image, title, description and publication date |
-| Read an entire article | **Click an article** | Redirected to the news source's site to read the entire article |
+| Display pitches | **On page load** | List of various pitches category |
+**On signing in** | create a new pitch|
+| Display pitches created within your profile page | **On page load** | view pitches created |
+| like or dislike a pitch| **Signing out** |displays the home page  |
 
 ### Prerequisites
 
@@ -41,21 +42,22 @@ You need the following to start working on the project on your local computer:
 * Ensure you have python3.8 installed in your computer.
 * From the terminal navigate to the cloned project folder.
 * Create a virtual environment and access the folder via your virtual amchine.
-* Visit https://newsapi.org/ and register for an API key.
+
 * Create start.sh file and in it write the following lines:
 ```
- export NEWS_API_KEY='<Your-Api-Key>'
- python3.6 manage.py server
+ export SECRET_KEY='<Your-secret-Key>'
+ python3.8 manage.py server
 ```
 * Run ```chmod +x start.sh``` follwoed by ``` ./start.sh ``` while in the project folder to start the project.
 * Once started, the project can be accessed on your localhost using the address: ``` localhost:5000 ```.
-* Alternatively the application can be accessed by visiting https://newapis.herokuapp.com/
+* Alternatively the application can be accessed by visiting https://git.heroku.com/pitches0.git
 
 ## Technologies Used
 
 * Python v3.8
 * Boostrap
 * Flask
+
 
 ## License
 
